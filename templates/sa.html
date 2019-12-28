@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+
+	<form>
+        <textarea style="resize:none; width: 500px; height: 200px;"  class="u-full-width" placeholder="Enter your text here." id="exampleMessage"></textarea>
+        <br>
+        <input class="button" type="submit" value="Submit">
+    </form>	
+    <label>Sentiment: {{result}}</label>
+
+{% endblock content%}
