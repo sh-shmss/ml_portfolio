@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify, render_template, flash
-from forms.forms  import PredictionForm
+from forms.forms  import PredictionForm, VisualizationForm
+from graph.graph import PlotNetwork
 #from bokeh.embed import components
 #from bokeh.plotting import figure
-#import joblib
+import joblib
 
-
+#from nltk.data import find
+#import gensim
+#word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
+#model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_sample, binary=False)
 
 import json
 from bokeh.embed import components
@@ -17,14 +21,13 @@ from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.sampledata.iris import flowers
 
-
+#loaded_model = joblib.load('models/language_detector.pkl')
+target_names = ['Arabic', 'German', 'English', 'Spanish', 'French', 'Italian',
+                'Japanese', 'Dutch', 'Polish', 'Portugese', 'Russian']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 app.debug = True
-
-#ld_model = load('language_detection.pkl')
-#sa_model = load('sentiment_analysis.pkl')
 
 @app.route('/')
 @app.route('/about')
@@ -37,7 +40,8 @@ def language_detection():
     form = PredictionForm()
     prediction=""
     if form.user_input.data:
-        prediction=form.user_input.data
+        sentence=form.user_input.data
+        prediction = loaded_model.predict([sentence])
     return render_template('ld.html', prediction=prediction, form=form)
 
 
@@ -49,32 +53,17 @@ def sentiment_analysis():
         prediction=form.user_input.data
     return render_template('sa.html', prediction=prediction, form=form)
 
-def make_plot(x, y):
-    p = figure(title = "Iris Morphology", sizing_mode="fixed", plot_width=400, plot_height=400)
-    p.xaxis.axis_label = x
-    p.yaxis.axis_label = y
-    p.circle(flowers[x], flowers[y], color=colors, fill_alpha=0.2, size=10)
-    return p
-
-colormap = {'setosa': 'red', 'versicolor': 'green', 'virginica': 'blue'}
-colors = [colormap[x] for x in flowers['species']]
-features=[("sepal_length", "sepal_width"), ("petal_length", "petal_width")]
-options=[0,1]
-@app.route('/dv', methods=['GET','POST'])
-def data_visualization():
-    form = PredictionForm()
-    if form.user_input.data:
-        current_option = form.user_input.data
-    else:
-        current_option = options[0]
-    plot = make_plot(features[int(current_option)][0],features[int(current_option)][1])
-    script, div = components(plot)
-    return render_template("dv.html", form=form, script=script, div=div,
-                options=options,  current_option=current_option)
-
-
-
-
+#@app.route('/dv', methods=['GET','POST'])
+#def data_visualization():
+#    form = VisualizationForm()
+#    if form.user_input.data and form.user_input_no:
+#        current_word = form.user_input.data
+#        current_no= form.user_input_no.data
+#    else:
+#        current_word, current_no = 'data', 50
+#    plot = PlotNetwork(current_word, int(current_no), model).make_plot()
+#    script, div = components(plot)
+#    return render_template("dv.html", form=form, script=script, div=div)
 
 
 if __name__ == "__main__":
