@@ -21,7 +21,7 @@ from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.sampledata.iris import flowers
 
-#loaded_model = joblib.load('models/language_detector.pkl')
+loaded_model = joblib.load('models/langauge_detector.joblib')
 target_names = ['Arabic', 'German', 'English', 'Spanish', 'French', 'Italian',
                 'Japanese', 'Dutch', 'Polish', 'Portugese', 'Russian']
 
@@ -42,6 +42,7 @@ def language_detection():
     if form.user_input.data:
         sentence=form.user_input.data
         prediction = loaded_model.predict([sentence])
+        prediction = target_names[prediction[0]]
     return render_template('ld.html', prediction=prediction, form=form)
 
 
