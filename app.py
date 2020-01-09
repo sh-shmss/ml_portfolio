@@ -5,10 +5,10 @@ from models.predictor import Predict
 #from bokeh.embed import components
 #from bokeh.plotting import figure
 
-#from nltk.data import find
-#import gensim
-#word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
-#model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_sample, binary=False)
+from nltk.data import find
+import gensim
+word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
+model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_sample, binary=False)
 
 import json
 from bokeh.embed import components
@@ -51,17 +51,17 @@ def sentiment_analysis():
       prediction = Predict(text).analyze_sentiment()
     return render_template('sa.html', prediction=prediction, form=form)
 
-#@app.route('/dv', methods=['GET','POST'])
-#def data_visualization():
-#    form = VisualizationForm()
-#    if form.user_input.data and form.user_input_no:
-#        current_word = form.user_input.data
-#        current_no= form.user_input_no.data
-#    else:
-#        current_word, current_no = 'data', 50
-#    plot = PlotNetwork(current_word, int(current_no), model).make_plot()
-#    script, div = components(plot)
-#    return render_template("dv.html", form=form, script=script, div=div)
+@app.route('/dv', methods=['GET','POST'])
+def data_visualization():
+    form = VisualizationForm()
+    if form.user_input.data and form.user_input_no:
+        current_word = form.user_input.data
+        current_no= form.user_input_no.data
+    else:
+        current_word, current_no = 'data', 50
+    plot = PlotNetwork(current_word, int(current_no), model).make_plot()
+    script, div = components(plot)
+    return render_template("dv.html", form=form, script=script, div=div)
 
 
 if __name__ == "__main__":
