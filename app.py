@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify, render_template, flash
 from forms.forms  import PredictionForm, VisualizationForm
 from graph.graph import PlotNetwork
+from models.predictor import Predict
 #from bokeh.embed import components
 #from bokeh.plotting import figure
-import joblib
 
 #from nltk.data import find
 #import gensim
@@ -21,9 +21,6 @@ from bokeh.plotting import figure
 from bokeh.resources import CDN
 from bokeh.sampledata.iris import flowers
 
-loaded_model = joblib.load('models/langauge_detector.joblib')
-target_names = ['Arabic', 'German', 'English', 'Spanish', 'French', 'Italian',
-                'Japanese', 'Dutch', 'Polish', 'Portugese', 'Russian']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -38,20 +35,20 @@ def about():
 @app.route('/ld', methods=['GET','POST'])
 def language_detection():
     form = PredictionForm()
-    prediction=""
+    prediction = ""
     if form.user_input.data:
-        sentence=form.user_input.data
-        prediction = loaded_model.predict([sentence])
-        prediction = target_names[prediction[0]]
+        text = form.user_input.data
+        prediction = Predict([text]).detect_language() 
     return render_template('ld.html', prediction=prediction, form=form)
 
 
 @app.route('/sa', methods=['GET','POST'])
 def sentiment_analysis():
     form = PredictionForm()
-    prediction=""
+    prediction = ""
     if form.user_input.data:
-        prediction=form.user_input.data
+      text = form.user_input.data
+      prediction = Predict(text).analyze_sentiment()
     return render_template('sa.html', prediction=prediction, form=form)
 
 #@app.route('/dv', methods=['GET','POST'])
