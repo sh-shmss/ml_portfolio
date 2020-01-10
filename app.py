@@ -1,4 +1,3 @@
-from bokeh.sampledata.iris import flowers
 from bokeh.resources import CDN
 from bokeh.plotting import figure
 from bokeh.embed import json_item

@@ -1,7 +1,7 @@
 from nltk.data import find
 import gensim
 import math
-import networkx as nx
+# import networkx as nx
 import numpy as np
 from colour import Color
 from bokeh.io import show
