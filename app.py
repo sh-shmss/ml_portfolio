@@ -18,6 +18,10 @@ import gensim
 secret_key = os.environ.get('SECRET_KEY')
 db_username = os.environ.get('DB_USERNAME')
 db_password = os.environ.get('DB_PASSWORD')
+host = os.environ.get('HOST')
+port = os.environ.get('PORT')
+db = os.environ.get('DB')
+table = os.environ.get('TABLE')
 
 
 word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
@@ -30,13 +34,13 @@ def insert_db(component, user_input, user_input_no, prediction):
     timestamp = strftime("%Y-%m-%d %H:%M:%S", localtime()) 
     connection = psycopg2.connect(user = db_username,
                                   password = db_password,
-                                  host = "127.0.0.1",
-                                  port = "5432",
-                                  database = "ml")
+                                  host = host,
+                                  port = port,
+                                  database = db)
 
     cursor = connection.cursor()
 
-    postgres_insert_query = """ INSERT INTO ml(component, user_input, user_input_no, prediction, timestamp, ip) VALUES (%s,%s,%s,%s,%s,%s)"""
+    postgres_insert_query = f""" INSERT INTO {table}(component, user_input, user_input_no, prediction, timestamp, ip) VALUES (%s,%s,%s,%s,%s,%s)"""
     record_to_insert = (component, user_input, user_input_no, prediction, timestamp, ip)
     cursor.execute(postgres_insert_query, record_to_insert)
 
