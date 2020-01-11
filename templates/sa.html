@@ -12,7 +12,7 @@
     <br>
     {{ form.submit(onclick="preloader()")}}
 	</form>
-    <label>Probability of positive sentiment: {{prediction}}</label>
+    <label>Probability of positive sentiment: {{prediction}}
     <div id="loading" style=" top: 200 px;
     display: none;
     margin: auto;
@@ -21,5 +21,5 @@
     width: 160px;
     height: 160px;
     background: url(/static/images/loadingimage.gif) no-repeat;
-    cursor: wait;"></div>
+    cursor: wait;"></div></label>
 {% endblock content%}
