@@ -62,6 +62,11 @@ def about():
     return render_template('about.html', body='About')
 
 
+@app.route('/aa')
+def academic_achievements():
+    return render_template('aa.html', body='Academic Achievements')
+
+
 @app.route('/ld', methods=['GET', 'POST'])
 def language_detection():
     form = PredictionForm()
