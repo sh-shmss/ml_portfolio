@@ -8,13 +8,14 @@
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-1.4.0.min.js"></script>
 <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-1.4.0.min.js"></script>
 	<form method="POST">
-        {{ form.user_input(placeholder="Word", id="exampleMessage")}} <br>
+    {{ form.csrf_token }}
+    {{ form.user_input(placeholder="Word", id="exampleMessage")}} <br>
     {{ form.user_input_no(placeholder="Number", id="exampleMessage")}}
     <br>
     {{ form.submit() }}
 	</form>
 {{ script|safe }}
 {{ div|safe }}
-
+{{ prediction }}
 
 {% endblock content%}

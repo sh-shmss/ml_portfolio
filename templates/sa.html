@@ -8,6 +8,7 @@
 // ]]></script>
 
 	<form method="POST">
+    {{ form.csrf_token }}
     {{ form.user_input(style="resize:none; width: 500px; height: 200px;", class="u-full-width", placeholder="Enter your text here.", id="exampleMessage")}}
     <br>
     {{ form.submit(onclick="preloader()")}}

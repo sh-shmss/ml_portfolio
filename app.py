@@ -69,12 +69,15 @@ def academic_achievements():
 
 @app.route('/ld', methods=['GET', 'POST'])
 def language_detection():
+    prediction= ""
     form = PredictionForm()
-    prediction = ""
     if form.user_input.data:
         text = form.user_input.data
-        prediction = Predict([text]).detect_language()
-        insert_db("ld", text, str(0), str(prediction))
+        if 400<=len(text)<=4000:
+            prediction = Predict([text]).detect_language()
+            insert_db("ld", text, str(0), str(prediction))
+        else:
+            prediction = "Enter a paragraph between 400 and 4000 characters."
     return render_template('ld.html', prediction=prediction, form=form)
 
 
@@ -84,23 +87,39 @@ def sentiment_analysis():
     prediction = ""
     if form.user_input.data:
         text = form.user_input.data
-        prediction = Predict(text).analyze_sentiment()
-        insert_db("sa", text, str(0), str(prediction))
+        if 400<=len(text)<=4000:
+            prediction = Predict(text).analyze_sentiment()
+            insert_db("sa", text, str(0), str(prediction))
+        else:
+            prediction = "Enter a paragraph between 400 and 4000 characters."
     return render_template('sa.html', prediction=prediction, form=form)
 
 
 @app.route('/dv', methods=['GET', 'POST'])
 def data_visualization():
+    prediction = ""
     form = VisualizationForm()
     if form.user_input.data and form.user_input_no:
         current_word = form.user_input.data
         current_no = form.user_input_no.data
     else:
         current_word, current_no = 'data', 50
-    plot = PlotNetwork(current_word, int(current_no), model).make_plot()
-    script, div = components(plot)
-    insert_db("dv", str(current_word), str(current_no), "none")
-    return render_template("dv.html", form=form, script=script, div=div)
+    try:
+        current_no = int(current_no)
+        if 0<current_no<=100:
+            plot = PlotNetwork(current_word, current_no, model).make_plot()
+            script, div = components(plot)
+            insert_db("dv", str(current_word), str(current_no), "none")
+            return render_template("dv.html", form=form, prediction=prediction, script=script, div=div)
+        else:
+            prediction = "Enter a valid number between 1 and 100."
+            return render_template("dv.html", form=form, prediction=prediction)
+    except ValueError:
+        prediction = "Enter a valid number between 1 and 100."
+        return render_template("dv.html", form=form, prediction=prediction)
+    except KeyError:
+        prediction = "Word not found in the vocabulary. Try another word."
+        return render_template("dv.html", form=form, prediction=prediction)
 
 
 if __name__ == "__main__":

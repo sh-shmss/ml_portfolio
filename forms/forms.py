@@ -1,14 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import TextAreaField, TextField, SubmitField
-from wtforms.validators import Required,NumberRange
+from wtforms import TextAreaField, TextField, SubmitField, validators
 
 
 class PredictionForm(FlaskForm):
-    user_input = TextAreaField(validators=[Required()])
+    user_input = TextAreaField()
     submit = SubmitField('Predict')
 
 
 class VisualizationForm(FlaskForm):
-    user_input = TextField(validators=[Required()])
-    user_input_no = TextField(validators=[Required(),NumberRange(min=1)])
+    user_input = TextField()
+    user_input_no = TextField()
     submit = SubmitField('Visualize')
