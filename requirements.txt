@@ -477,7 +477,7 @@ prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==2.0.10
 protobuf==3.11.2
-psutil==5.5.1
+psutil==5.6.6
 ptyprocess==0.6.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.7
@@ -681,7 +681,7 @@ prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==2.0.10
 protobuf==3.11.2
-psutil==5.5.1
+psutil==5.6.6
 psycopg2==2.8.4
 ptyprocess==0.6.0
 pyasn1==0.4.8
