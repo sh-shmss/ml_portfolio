@@ -73,11 +73,11 @@ def language_detection():
     form = PredictionForm()
     if form.user_input.data:
         text = form.user_input.data
-        if 400<=len(text)<=4000:
+        if 300<=len(text)<=3000:
             prediction = Predict([text]).detect_language()
             insert_db("ld", text, str(0), str(prediction))
         else:
-            prediction = "Enter a paragraph between 400 and 4000 characters."
+            prediction = "Enter a paragraph between 300 and 3000 characters."
     return render_template('ld.html', prediction=prediction, form=form)
 
 
@@ -87,11 +87,11 @@ def sentiment_analysis():
     prediction = ""
     if form.user_input.data:
         text = form.user_input.data
-        if 400<=len(text)<=4000:
+        if 300<=len(text)<=3000:
             prediction = Predict(text).analyze_sentiment()
             insert_db("sa", text, str(0), str(prediction))
         else:
-            prediction = "Enter a paragraph between 400 and 4000 characters."
+            prediction = "Enter a paragraph between 300 and 3000 characters."
     return render_template('sa.html', prediction=prediction, form=form)
 
 
