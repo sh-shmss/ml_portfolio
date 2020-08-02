@@ -1,9 +1,9 @@
-# from bokeh.resources import CDN
-# from bokeh.plotting import figure
-# from bokeh.embed import json_item
+from bokeh.resources import CDN
+from bokeh.plotting import figure
+from bokeh.embed import json_item
 from jinja2 import Template
 from flask import Flask, render_template, request
-# from bokeh.embed import components
+from bokeh.embed import components
 import json
 from flask import Flask, request, jsonify, render_template, flash
 from forms.forms import PredictionForm, VisualizationForm
