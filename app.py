@@ -12,8 +12,8 @@ from models.predictor import Predict
 import os
 from time import localtime, strftime
 import psycopg2
-# from nltk.data import find
-# import gensim
+from nltk.data import find
+import gensim
 
 secret_key = os.environ.get('SECRET_KEY')
 db_username = os.environ.get('DB_USERNAME')
@@ -23,10 +23,10 @@ port = os.environ.get('PORT')
 db = os.environ.get('DB')
 table = os.environ.get('TABLE')
 
-# # for data visualization component
-# word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
-# model = gensim.models.KeyedVectors.load_word2vec_format(
-#     word2vec_sample, binary=False)
+# for data visualization component
+word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
+model = gensim.models.KeyedVectors.load_word2vec_format(
+    word2vec_sample, binary=False)
 
 
 def insert_db(component, user_input, user_input_no, prediction):
@@ -95,31 +95,31 @@ def sentiment_analysis():
     return render_template('sa.html', prediction=prediction, form=form)
 
 
-# @app.route('/dv', methods=['GET', 'POST'])
-# def data_visualization():
-#     prediction = ""
-#     form = VisualizationForm()
-#     if form.user_input.data and form.user_input_no:
-#         current_word = form.user_input.data
-#         current_no = form.user_input_no.data
-#     else:
-#         current_word, current_no = 'data', 50
-#     try:
-#         current_no = int(current_no)
-#         if 0<current_no<=100:
-#             plot = PlotNetwork(current_word, current_no, model).make_plot()
-#             script, div = components(plot)
-#             insert_db("dv", str(current_word), str(current_no), "none")
-#             return render_template("dv.html", form=form, prediction=prediction, script=script, div=div)
-#         else:
-#             prediction = "Enter a valid number between 1 and 100."
-#             return render_template("dv.html", form=form, prediction=prediction)
-#     except ValueError:
-#         prediction = "Enter a valid number between 1 and 100."
-#         return render_template("dv.html", form=form, prediction=prediction)
-#     except KeyError:
-#         prediction = "Word not found in the vocabulary. Try another word."
-#         return render_template("dv.html", form=form, prediction=prediction)
+@app.route('/dv', methods=['GET', 'POST'])
+def data_visualization():
+    prediction = ""
+    form = VisualizationForm()
+    if form.user_input.data and form.user_input_no:
+        current_word = form.user_input.data
+        current_no = form.user_input_no.data
+    else:
+        current_word, current_no = 'data', 50
+    try:
+        current_no = int(current_no)
+        if 0<current_no<=100:
+            plot = PlotNetwork(current_word, current_no, model).make_plot()
+            script, div = components(plot)
+            insert_db("dv", str(current_word), str(current_no), "none")
+            return render_template("dv.html", form=form, prediction=prediction, script=script, div=div)
+        else:
+            prediction = "Enter a valid number between 1 and 100."
+            return render_template("dv.html", form=form, prediction=prediction)
+    except ValueError:
+        prediction = "Enter a valid number between 1 and 100."
+        return render_template("dv.html", form=form, prediction=prediction)
+    except KeyError:
+        prediction = "Word not found in the vocabulary. Try another word."
+        return render_template("dv.html", form=form, prediction=prediction)
 
 
 if __name__ == "__main__":
