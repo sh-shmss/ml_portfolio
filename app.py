@@ -24,9 +24,9 @@ db = os.environ.get('DB')
 table = os.environ.get('TABLE')
 
 # for data visualization component
-# word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
-# model = gensim.models.KeyedVectors.load_word2vec_format(
-#     word2vec_sample, binary=False)
+word2vec_sample = str(find('models/word2vec_sample/pruned.word2vec.txt'))
+model = gensim.models.KeyedVectors.load_word2vec_format(
+    word2vec_sample, binary=False)
 
 
 def insert_db(component, user_input, user_input_no, prediction):
@@ -45,7 +45,7 @@ def insert_db(component, user_input, user_input_no, prediction):
     cursor.execute(postgres_insert_query, record_to_insert)
 
     connection.commit()
-    count = cursor.rowcount
+    # count = cursor.rowcount
 
     cursor.close()
     connection.close()
@@ -122,18 +122,22 @@ def data_visualization():
         return render_template("dv.html", form=form, prediction=prediction)
 
 
-@app.route('/tg', methods=['GET', 'POST'])
-def generate_text():
-    generated_text = ""
-    form = PredictionForm()
-    if form.user_input.data:
-            text = form.user_input.data
-            if 5<= len(text.split(" ")) <=15:
-                generate_text = "test" # Predict(text).analyze_sentiment()
+# @app.route('/tg', methods=['GET', 'POST'])
+# def generate_text():
+    # generated_text = ""
+    # form = PredictionForm()
+    # if form.user_input.data:
+            # text = form.user_input.data
+            # if 5<= len(text.split(" ")) <=15:
+                # generated_text = "test1" 
                 # insert_db("tg", text, str(0), str(generated_text))
-            else:
-                prediction = "Enter between 5 and 15 words."
-    return render_template('tg.html', generated_text=generated_text, form=form)
+            # else:
+                # generated_text = "Enter between 5 and 15 words."
+    # else:
+        # text = "Let's see, the user forgot to enter anything."
+        # generated_text = "test2"
+        # insert_db("tg", text, str(0), str(generated_text))
+    # return render_template('tg.html', generated_text=generated_text, form=form)
 
 
 if __name__ == "__main__":
