@@ -4,7 +4,7 @@ from wtforms import TextAreaField, TextField, SubmitField, validators
 
 class PredictionForm(FlaskForm):
     user_input = TextAreaField()
-    submit = SubmitField('Predict')
+    submit = SubmitField('Submit')
 
 
 class VisualizationForm(FlaskForm):

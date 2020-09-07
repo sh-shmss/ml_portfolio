@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<script type="text/javascript">// <![CDATA[
+        function preloader(){
+            document.getElementById("loading").style.display = "block";
+        }//preloader
+// ]]></script>
+
+	<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.user_input(style="resize:none; width: 500px; height: 200px;", class="u-full-width", placeholder="Enter your text here.", id="exampleMessage")}}
+    <br>
+    {{ form.submit(onclick="preloader()")}}
+	</form>
+    <label>Generated text: {{generated_text}}
+    <div id="loading" style=" top: 200 px;
+    display: none;
+    margin: auto;
+    position: absolute;
+    z-index: 1000;
+    width: 160px;
+    height: 160px;
+    background: url(/static/images/loadingimage.gif) no-repeat;
+    cursor: wait;"></div></label>
+{% endblock content%}
