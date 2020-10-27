@@ -383,7 +383,7 @@ colorcet==2.0.2
 colorzero==1.1
 colour==0.1.5
 cookies==2.2.1
-cryptography==2.6.1
+cryptography==3.2
 cycler==0.10.0
 decorator==4.4.1
 defusedxml==0.6.0
@@ -587,7 +587,7 @@ colorcet==2.0.2
 colorzero==1.1
 colour==0.1.5
 cookies==2.2.1
-cryptography==2.6.1
+cryptography==3.2
 cycler==0.10.0
 decorator==4.4.1
 defusedxml==0.6.0
