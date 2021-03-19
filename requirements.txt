@@ -21,7 +21,7 @@ nltk==3.4.5
 numpy==1.18.0
 packaging==19.2
 pandas==0.25.3
-Pillow==6.2.1
+Pillow==8.1.1
 pymongo==3.10.0
 pyparsing==2.4.6
 python-dateutil==2.8.1
@@ -89,7 +89,7 @@ pandocfilters==1.4.2
 parso==0.5.2
 pexpect==4.7.0
 pickleshare==0.7.5
-Pillow==6.2.1
+Pillow==8.1.1
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 ptyprocess==0.6.0
@@ -189,7 +189,7 @@ pandocfilters==1.4.2
 parso==0.5.2
 pexpect==4.7.0
 pickleshare==0.7.5
-Pillow==6.2.1
+Pillow==8.1.1
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 protobuf==3.11.2
@@ -306,7 +306,7 @@ param==1.9.2
 parso==0.5.2
 pexpect==4.7.0
 pickleshare==0.7.5
-Pillow==6.2.1
+Pillow==8.1.1
 prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==2.0.10
@@ -472,7 +472,7 @@ pickleshare==0.7.5
 picraft==1.0
 piglow==1.2.4
 pigpio==1.44
-Pillow==6.2.1
+Pillow==8.1.1
 prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==2.0.10
@@ -676,7 +676,7 @@ pickleshare==0.7.5
 picraft==1.0
 piglow==1.2.4
 pigpio==1.44
-Pillow==6.2.1
+Pillow==8.1.1
 prometheus-client==0.7.1
 promise==2.3
 prompt-toolkit==2.0.10
