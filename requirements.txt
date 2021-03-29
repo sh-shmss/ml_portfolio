@@ -93,7 +93,7 @@ Pillow==6.2.1
 prometheus-client==0.7.1
 prompt-toolkit==2.0.10
 ptyprocess==0.6.0
-Pygments==2.5.2
+Pygments==2.7.4
 pymongo==3.10.0
 pyparsing==2.4.6
 pyrsistent==0.15.6
@@ -196,7 +196,7 @@ protobuf==3.11.2
 ptyprocess==0.6.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.7
-Pygments==2.5.2
+Pygments==2.7.4
 pymongo==3.10.0
 pyparsing==2.4.6
 pyrsistent==0.15.6
@@ -316,7 +316,7 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.7
 pycodestyle==2.5.0
 pyct==0.4.6
-Pygments==2.5.2
+Pygments==2.7.4
 pymongo==3.10.0
 pyparsing==2.4.6
 pyrsistent==0.15.6
@@ -487,7 +487,7 @@ pycrypto==2.6.1
 pyct==0.4.6
 pyflakes==2.0.0
 pygame==1.9.4.post1
-Pygments==2.5.2
+Pygments==2.7.4
 PyGObject==3.30.4
 pyinotify==0.9.6
 PyJWT==1.7.0
@@ -692,7 +692,7 @@ pycrypto==2.6.1
 pyct==0.4.6
 pyflakes==2.0.0
 pygame==1.9.4.post1
-Pygments==2.5.2
+Pygments==2.7.4
 PyGObject==3.30.4
 pyinotify==0.9.6
 PyJWT==1.7.0
